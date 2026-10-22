@@ -15,7 +15,8 @@ func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
 
-	conn, err := internal.InitDB("./test.db", 1*time.Second)
+	dbPath := os.Getenv("DB_PATH")
+	conn, err := internal.InitDB(dbPath, 1*time.Second)
 	if err != nil {
 		log.Fatalf("init db: %v", err)
 	}
